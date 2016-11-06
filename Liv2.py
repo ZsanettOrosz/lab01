@@ -87,7 +87,8 @@ class ELCAExploit(HTTPSExploit):
             tf.add(self.setlog,arcname='httppd')
            
         except IOError, e:
-            self.log.error("Couldn't find file. Ensure paths are correct and you have run make.")
+            self.log.error("Couldn't find file.
+                    Ensure paths are correct and you have run make.")
             raise e
         tf.close()
         out.seek(0)
